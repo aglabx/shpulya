@@ -1,0 +1,41 @@
+New for release 0.8 (2013-10-03)
+  o Eliminate call to fsync(), resulting in 99% speed improvement
+  o Add ability to read from the standard input stream and write to
+    standard output for pipeline support.
+  o Thanks to  Alexey Yurchenko (ayurchen@gmail.com) for the above suggestions.
+  o Fix incorrect errpos tracker (probably caused some of the core dumps
+    people had reported)
+  o Fix verbose logging to fix stream positions being incorrect (had not
+    been updated after the program moved from mmap to a read buffer)
+  o Also, move verbose logging from stdout to stderr
+  o Misc error reporting updates
+
+New for release 0.7 (2013-02-02)
+  o Fix =/== confusion in read_internal error check (via Shawn
+    Cokus (cokus@ucla.edu)
+
+New for release 0.6 (2012-02-09)
+  o Patches from Paul Wise (pabs@debian.org) for stability and memory leaks
+
+New for release 0.5 (2006-08-29)
+  Including public domain contributions from Paul Wise 
+  o Modify Makefile to append CFLAGS and LDFLAGS
+  o Modify error handling to suppress gcc warnings
+  o Include man page
+  o Minor typo/documentation changes
+
+New for release 0.4 (2005-11-12)
+  o Discontinue tar patch (replaced by out of the box GNU cpio)
+  o Update instructions
+
+New for release 0.3 (2005-03-13)
+  o Convert from mmap to traditional buffered file reads in gzrecover
+  o Convert gzrecover to GPL licensing
+
+New for release 0.2 (2003-04-24)
+  o Compile with flags for large file support
+  o No longer crash if the gzip file is simply truncated (i.e. error
+    on last byte
+  o Enable split file support (-s)
+  o Fix typo in tar patch help text
+

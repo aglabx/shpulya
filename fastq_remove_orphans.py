@@ -68,7 +68,7 @@ if __name__ == '__main__':
                 fh.readline()
                 fh.readline()
                 fh.readline()
-    print("Index resulst:")
+    print("Indexing results:")
     print("\t fastq1 %s reads" % len(headers_r1))
     print("\t fastq2 %s reads" % len(headers_r2))
     if index_file:
@@ -77,6 +77,7 @@ if __name__ == '__main__':
     positive_list = headers_r1.intersection(headers_r2).intersection(headers_i1)
     print("Result: %s reads remains" % len(positive_list))
 
+    print("Saving fastq1 reads...")
     with open(output1_file, "w") as fw:
         with open(fastq1_file) as fh:
             while True:
@@ -96,6 +97,7 @@ if __name__ == '__main__':
                 fw.write(strand)
                 fw.write(Q)
 
+    print("Saving fastq2 reads...")
     with open(output2_file, "w") as fw:
         with open(fastq2_file) as fh:
             while True:
@@ -116,6 +118,7 @@ if __name__ == '__main__':
                 fw.write(Q)
 
     if index_file:
+        print("Saving index reads...")
         with open(output_index, "w") as fw:
             with open(index_file) as fh:
                 while True:

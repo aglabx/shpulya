@@ -19,7 +19,7 @@ if __name__ == '__main__':
     parser.add_argument('-o','--ouput', help='Output prefix', required=True)
     parser.add_argument('--minlength', help='Maximal read length', required=True)
     parser.add_argument('--maxlength', help='Maximal read length', required=True)
-    parser.add_argument('--indexlength', help='Index length (default 8)', required=False, default=None)
+    parser.add_argument('--indexlength', help='Index length (default 8)', required=False, default=8)
     args = vars(parser.parse_args()) 
 
     fastq1_file_gz = args["input1"]

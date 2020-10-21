@@ -10,6 +10,15 @@ Shpylya consists of three steps:
 
 ## Installation
 
+Clone this repository:
+
+```
+git clone https://github.com/aglabx/shpulya.git
+cd shpulya
+```
+
+Compile gzrecover:
+
 ```
 cd gzrt
 make
@@ -51,6 +60,8 @@ But it should be kept in mind that then these data can only be used as paired re
 ## Known issues
 
 Final Q-string can contain some unexpected symbols.
+
+## Citation
 
 ## Copyright Notice
 

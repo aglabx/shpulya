@@ -39,7 +39,7 @@ if __name__ == '__main__':
             if not header:
                 print("Completed.")
                 break
-            headers_r1.add(header.split()[:-1])
+            headers_r1.add(header.split()[0])
             fh.readline()
             fh.readline()
             fh.readline()
@@ -51,7 +51,7 @@ if __name__ == '__main__':
             if not header:
                 print("Completed.")
                 break
-            headers_r2.add(header.split()[:-1])
+            headers_r2.add(header.split()[0])
             fh.readline()
             fh.readline()
             fh.readline()
@@ -64,7 +64,7 @@ if __name__ == '__main__':
                 if not header:
                     print("Completed.")
                     break
-                headers_i1.add(header.split()[:-1])
+                headers_i1.add(header.split()[0])
                 fh.readline()
                 fh.readline()
                 fh.readline()
@@ -88,7 +88,7 @@ if __name__ == '__main__':
                 strand = fh.readline()
                 Q = fh.readline()
 
-                key = header.split()[:-1]
+                key = header.split()[0]
                 if not key in positive_list:
                     continue
                 fw.write(header)
@@ -107,7 +107,7 @@ if __name__ == '__main__':
                 strand = fh.readline()
                 Q = fh.readline()
 
-                key = header.split()[:-1]
+                key = header.split()[0]
                 if not key in positive_list:
                     continue
                 fw.write(header)
@@ -127,7 +127,7 @@ if __name__ == '__main__':
                     strand = fh.readline()
                     Q = fh.readline()
 
-                    key = header.split()[:-1]
+                    key = header.split()[0]
                     if not key in positive_list:
                         continue
                     fw.write(header)

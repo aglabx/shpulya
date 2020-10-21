@@ -16,9 +16,9 @@ python shpulya.py -1 corrupted_1.fastq.gz -2 corrupted_2.fastq.gz -o ouput_file_
 
 where:
 
-**ouput_file_prefix** - prefix to which will be added _1.fastq and _2.fastq
-**minlength** - minimal expected sequence length, shpulya will drop all reads shoter that minimal length
-**minlength** - maximal expected sequence length, shpulya will drop all reads longer that maximal length
+- **ouput_file_prefix** - prefix to which will be added _1.fastq and _2.fastq;
+- **minlength** - minimal expected sequence length, shpulya will drop all reads shoter that minimal length;
+- **minlength** - maximal expected sequence length, shpulya will drop all reads longer that maximal length.
 
 Command for pair ends data + index file:
 
@@ -26,4 +26,4 @@ Command for pair ends data + index file:
 python shpulya.py -1 corrupted_R1_L001.fastq.gz -2 corrupted_R2_L001.fastq.gz -i -2 corrupted_I1_L001.fastq.gz -o ouput_file_prefix --minlength 50 --maxlength 160
 ```
 
-**ouput_file_prefix** - prefix to which will be added _R1_L001.fastq, _R2_L001.fastq, and _I1_L001.fastq.
+- **ouput_file_prefix** - prefix to which will be added _R1_L001.fastq, _R2_L001.fastq, and _I1_L001.fastq.

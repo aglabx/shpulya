@@ -8,6 +8,17 @@ Shpylya consists of three steps:
 2) removing the garbage from the unpacked data;
 3) recovery of paired and corresponding index file, if there is such a file, for example, 10Х data for scRNA.
 
+## Installation
+
+```
+cd gzrt
+make
+```
+
+If you have any issues with gzrecover installation, please read correspoing README file in gzrt folder.
+
+## Usage
+
 Command for usual pair ends data:
 
 ```

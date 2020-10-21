@@ -40,6 +40,14 @@ python shpulya.py -1 corrupted_R1_L001.fastq.gz -2 corrupted_R2_L001.fastq.gz -i
 - **ouput_file_prefix** - prefix to which will be added _R1_L001.fastq, _R2_L001.fastq, and _I1_L001.fastq;
 - **indexlength** - expected length of index sequenece (default value is 8), shpulya wikk drop all reads longer or shorter.
 
+Most reads are lost if the index file is corrupted, then you can count PE reads separately as if there were no indexes, and the indexes are counted like this:
+
+```
+python fix_index_archive.py -i corrupted_I1_L001.fastq.gz -o corrupted_I1_L001.fastq --indexlength 8
+```
+
+But it should be kept in mind that then these data can only be used as paired reads, after the corresponding trimming of indexes from the beginning of each read.
+
 ## Known issues
 
 Final Q-string can contain some unexpected symbols.

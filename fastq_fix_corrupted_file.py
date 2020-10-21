@@ -40,7 +40,7 @@ if __name__ == '__main__':
             if len([x for x in seq.strip() if not x in ["A","T","G","C","N"]]):
                 continue
             strand = fh1.readline()
-            if strand[0] not in ["+", "-"]:
+            if strand and strand[0] not in ["+", "-"]:
                 continue
             Q = fh1.readline()
             if not len(Q) == len(seq):

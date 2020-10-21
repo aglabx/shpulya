@@ -27,3 +27,16 @@ python shpulya.py -1 corrupted_R1_L001.fastq.gz -2 corrupted_R2_L001.fastq.gz -i
 ```
 
 - **ouput_file_prefix** - prefix to which will be added _R1_L001.fastq, _R2_L001.fastq, and _I1_L001.fastq.
+
+## Known issues
+
+Final Q-string can contain some unexpected symbols.
+
+## Copyright Notice
+
+shpulya written by Aleksey Komissarov (ad3002@gmail.com)
+Copyright (c) 2020 Aleksey Komissarov. 
+
+This code is licensed under the same GNU General Public License v2
+(or at your option, any later version).  See
+http://www.gnu.org/licenses/gpl.html

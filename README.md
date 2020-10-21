@@ -34,7 +34,7 @@ where:
 Command for pair ends data + index file:
 
 ```
-python shpulya.py -1 corrupted_R1_L001.fastq.gz -2 corrupted_R2_L001.fastq.gz -i -2 corrupted_I1_L001.fastq.gz -o ouput_file_prefix --minlength 50 --maxlength 160
+python shpulya.py -1 corrupted_R1_L001.fastq.gz -2 corrupted_R2_L001.fastq.gz -i corrupted_I1_L001.fastq.gz -o ouput_file_prefix --minlength 50 --maxlength 160
 ```
 
 - **ouput_file_prefix** - prefix to which will be added _R1_L001.fastq, _R2_L001.fastq, and _I1_L001.fastq.

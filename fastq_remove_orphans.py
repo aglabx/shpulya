@@ -74,7 +74,10 @@ if __name__ == '__main__':
     if index_file:
         print("\t index %s reads" % len(headers_i1))
     print("Intersection:")
-    positive_list = headers_r1.intersection(headers_r2).intersection(headers_i1)
+    if index_file:
+        positive_list = headers_r1.intersection(headers_r2).intersection(headers_i1)
+    else:
+        positive_list = headers_r1.intersection(headers_r2)
     print("Result: %s reads remains" % len(positive_list))
 
     print("Saving fastq1 reads...")

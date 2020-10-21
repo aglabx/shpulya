@@ -19,6 +19,7 @@ if __name__ == '__main__':
     parser.add_argument('-o','--ouput', help='Output prefix', required=True)
     parser.add_argument('--minlength', help='Maximal read length', required=True)
     parser.add_argument('--maxlength', help='Maximal read length', required=True)
+    parser.add_argument('--indexlength', help='Index length (default 8)', required=False, default=None)
     args = vars(parser.parse_args()) 
 
     fastq1_file_gz = args["input1"]
@@ -27,6 +28,7 @@ if __name__ == '__main__':
     output_prefix = args["ouput"]
     min_read_length = int(args["minlength"])
     max_read_length = int(args["maxlength"])
+    index_read_length = int(args["indexlength"])
 
     if not fastq1_file_gz.endswith(".gz"):
         print("File %s should be with .gz extension." % fastq1_file_gz)
@@ -51,7 +53,7 @@ if __name__ == '__main__':
         index_file_orph = ".".join(index_file_gz.split(".")[:-1]) + ".with_orphans"
 
     ### check gzrecover
-    working_folder = os.getcwd()
+    working_folder = os.path.dirname(os.path.abspath(__file__))
     exe_path = os.path.join(working_folder, "gzrt/gzrecover")
     step1_path = os.path.join(working_folder, "fastq_fix_corrupted_file.py")
     step2_path = os.path.join(working_folder, "fastq_remove_orphans.py")
@@ -63,8 +65,8 @@ if __name__ == '__main__':
     temp_file = output_prefix + ".temp"
 
     with open(temp_file, "w") as fw:
-        fw.write("%s -o %s %s" % (exe_path, fastq1_file_gz, fastq1_file))
-        fw.write("%s -o %s %s" % (exe_path, fastq2_file_gz, fastq2_file))
+        fw.write("%s -o %s %s\n" % (exe_path, fastq1_file, fastq1_file_gz))
+        fw.write("%s -o %s %s\n" % (exe_path, fastq2_file, fastq2_file_gz))
         if index_file_gz:
             fw.write("%s -o %s %s" % (exe_path, index_file_gz, index_file))
     command = "less %s | xargs -P 3 -I {} sh -c '{}'" % temp_file
@@ -73,10 +75,10 @@ if __name__ == '__main__':
 
     ### step 2. Remove junk
     with open(temp_file, "w") as fw:
-        fw.write("python %s -i %s -o %s -l %s -m %s" % (step1_path, fastq1_file, fastq1_file_orph, min_read_length, max_read_length))
-        fw.write("python %s -i %s -o %s -l %s -m %s" % (step1_path, fastq2_file, fastq2_file_orph, min_read_length, max_read_length))
+        fw.write("python %s -i %s -o %s -l %s -m %s\n" % (step1_path, fastq1_file, fastq1_file_orph, min_read_length, max_read_length))
+        fw.write("python %s -i %s -o %s -l %s -m %s\n" % (step1_path, fastq2_file, fastq2_file_orph, min_read_length, max_read_length))
         if index_file_gz:
-            fw.write("python %s -i %s -o %s -l %s -m %s" % (step1_path, index_file, index_file_orph, 4, max_read_length))
+            fw.write("python %s -i %s -o %s -l %s -m %s" % (step1_path, index_file_orph, index_file, index_read_length, index_read_length))
     command = "less %s | xargs -P 3 -I {} sh -c '{}'" % temp_file
     print(command)
     subprocess.check_call(command, shell=True)

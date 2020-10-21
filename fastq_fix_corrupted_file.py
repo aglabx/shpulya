@@ -29,6 +29,7 @@ if __name__ == '__main__':
         while fh1:
             header = fh1.readline()
             if not header:
+                print("Completed for %s." % fastq1_file)
                 break
             if not header.startswith("@"):
                 continue

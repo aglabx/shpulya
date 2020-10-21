@@ -61,6 +61,8 @@ But it should be kept in mind that then these data can only be used as paired re
 
 Final Q-string can contain some unexpected symbols.
 
+For large fastq files shpylya requeries some amount of memory, you can estimate it around 1/5 size of all processed files.
+
 ## Citation
 
 ## Copyright Notice

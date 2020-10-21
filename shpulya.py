@@ -68,7 +68,7 @@ if __name__ == '__main__':
         fw.write("%s -o %s %s\n" % (exe_path, fastq1_file, fastq1_file_gz))
         fw.write("%s -o %s %s\n" % (exe_path, fastq2_file, fastq2_file_gz))
         if index_file_gz:
-            fw.write("%s -o %s %s" % (exe_path, index_file_gz, index_file))
+            fw.write("%s -o %s %s" % (exe_path, index_file, index_file_gz))
     command = "less %s | xargs -P 3 -I {} sh -c '{}'" % temp_file
     print(command)
     subprocess.check_call(command, shell=True)
@@ -78,7 +78,7 @@ if __name__ == '__main__':
         fw.write("python %s -i %s -o %s -l %s -m %s\n" % (step1_path, fastq1_file, fastq1_file_orph, min_read_length, max_read_length))
         fw.write("python %s -i %s -o %s -l %s -m %s\n" % (step1_path, fastq2_file, fastq2_file_orph, min_read_length, max_read_length))
         if index_file_gz:
-            fw.write("python %s -i %s -o %s -l %s -m %s" % (step1_path, index_file_orph, index_file, index_read_length, index_read_length))
+            fw.write("python %s -i %s -o %s -l %s -m %s" % (step1_path, index_file, index_file_orph, index_read_length, index_read_length))
     command = "less %s | xargs -P 3 -I {} sh -c '{}'" % temp_file
     print(command)
     subprocess.check_call(command, shell=True)

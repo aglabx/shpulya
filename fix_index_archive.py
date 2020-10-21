@@ -32,8 +32,8 @@ if __name__ == '__main__':
     ### check gzrecover
     working_folder = os.path.dirname(os.path.abspath(__file__))
     exe_path = os.path.join(working_folder, "gzrt/gzrecover")
-    step1_path = os.path.join(working_folder, "fastq_fix_corrupted_file.py")
-    step2_path = os.path.join(working_folder, "fastq_remove_orphans.py")
+    step1_path = os.path.join(working_folder, "scripts", "fastq_fix_corrupted_file.py")
+    step2_path = os.path.join(working_folder, "scripts", "fastq_remove_orphans.py")
     make_dir = os.path.join(working_folder, "gzrt")
     if not os.path.isfile(exe_path):
         subprocess.Popen(["make"], cwd=make_dir, shell=True)

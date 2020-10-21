@@ -45,34 +45,44 @@ if __name__ == '__main__':
             fh.readline()
     print("Create header index for R2")
     headers_r2 = set()
+    orphan_R2 = 0
     with open(fastq2_file) as fh:
         while True:
             header = fh.readline()
             if not header:
                 print("Completed.")
                 break
-            headers_r2.add(header.split()[0])
+            key = header.split()[0]
+            if not key in headers_r1:
+                orphan_R2 += 1
+                continue
+            headers_r2.add(key)
             fh.readline()
             fh.readline()
             fh.readline()
     if index_file:
         print("Create header index for I1")
         headers_i1 = set()
+        orphan_I1 = 0
         with open(index_file) as fh:
             while True:
                 header = fh.readline()
                 if not header:
                     print("Completed.")
                     break
-                headers_i1.add(header.split()[0])
+                key = header.split()[0]
+                if not key in headers_r1:
+                    orphan_I1 += 1
+                    continue
+                headers_i1.add(key)
                 fh.readline()
                 fh.readline()
                 fh.readline()
     print("Indexing results:")
     print("\t fastq1 %s reads" % len(headers_r1))
-    print("\t fastq2 %s reads" % len(headers_r2))
+    print("\t fastq2 %s reads (not in R1: %s reads)" % (len(headers_r2), orphan_R2))
     if index_file:
-        print("\t index %s reads" % len(headers_i1))
+        print("\t index %s reads (not in R1: %s reads)" % (len(headers_i1), orphan_I1))
     print("Intersection:")
     if index_file:
         positive_list = headers_r1.intersection(headers_r2).intersection(headers_i1)
@@ -140,3 +150,5 @@ if __name__ == '__main__':
                     fw.write(seq)
                     fw.write(strand)
                     fw.write(Q)
+    print("Cleaning memory...")
+    print("Done!")

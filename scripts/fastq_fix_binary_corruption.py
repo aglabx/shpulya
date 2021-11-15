@@ -89,16 +89,19 @@ if __name__ == '__main__':
                 break
 
             name = header.split()[0]
-            if iid = 0:
+            if iid == 0:
                 dataset.setdefault(name, [None, None, None])
             else:
-                if not dataset[name][0]:
+                if not name in dataset:
                     continue
-                    
+
             dataset[name][iid] = [header, seq, strand, Q]
 
-    for name in dataset:
+    N = len(dataset)
+    for i, name in enumerate(dataset):
         fasqt1, fastq2, fastqI = dataset[name]
+        if i % 1000000 == 0:
+            print(f"Saving {i} from {N}")
         if fasqt1 and fastq2:
             fw1.write("".join(fasqt1))
             fw2.write("".join(fastq2))
@@ -107,8 +110,8 @@ if __name__ == '__main__':
         if fastqI and fasqt1[0] == fastqI[0]:
             fwI.write("".join(fastqI))
         else:
-            seqI = fastqI[0].split(":")[-1]
-            headerI = fastqI[0]
+            seqI = fasqt1[0].split(":")[-1]
+            headerI = fasqt1[0]
             strandI = "+"
             q = "F"*(len(seqI)-1)
             QI = f"{q}\n"

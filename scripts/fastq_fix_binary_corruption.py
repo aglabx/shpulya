@@ -69,8 +69,6 @@ if __name__ == '__main__':
     fw2 = open(output2_file, "w")
     fwI = open(outputI_file, "w")
 
-    i = 0
-
     dataset = {}
 
     iter1 = iter_item_from_suspicious_fastq(fh1)
@@ -80,7 +78,7 @@ if __name__ == '__main__':
     iterators = [iter1, iter2, iterI]
 
     for iid, iterator in enumerate(iterators):
-
+        i = 0
         while True:
             i += 1
             if i % 1000000 == 0:
@@ -91,7 +89,12 @@ if __name__ == '__main__':
                 break
 
             name = header.split()[0]
-            dataset.setdefault(name, [None, None, None])
+            if iid = 0:
+                dataset.setdefault(name, [None, None, None])
+            else:
+                if not dataset[name][0]:
+                    continue
+                    
             dataset[name][iid] = [header, seq, strand, Q]
 
     for name in dataset:

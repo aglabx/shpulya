@@ -112,7 +112,7 @@ if __name__ == '__main__':
         else:
             seqI = fasqt1[0].split(":")[-1]
             headerI = fasqt1[0]
-            strandI = "+"
+            strandI = "+\n"
             q = "F"*(len(seqI)-1)
             QI = f"{q}\n"
             fwI.write("".join([headerI, seqI, strandI, QI]))

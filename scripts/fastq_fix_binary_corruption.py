@@ -82,7 +82,7 @@ if __name__ == '__main__':
         while True:
             i += 1
             if i % 1000000 == 0:
-                print(f"File {iid}: {i} and dataset size: {len(dataset)}")
+                print(f"File {iid}: {i/1000000}M and dataset size: {len(dataset)}")
             try:
                 header, seq, strand, Q = next(iterator)
             except:
@@ -101,7 +101,7 @@ if __name__ == '__main__':
     for i, name in enumerate(dataset):
         fasqt1, fastq2, fastqI = dataset[name]
         if i % 1000000 == 0:
-            print(f"Saving {i} from {N}")
+            print(f"Saving {i/1000000}M from {N}")
         if fasqt1 and fastq2:
             fw1.write("".join(fasqt1))
             fw2.write("".join(fastq2))

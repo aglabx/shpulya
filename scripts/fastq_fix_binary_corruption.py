@@ -73,49 +73,41 @@ if __name__ == '__main__':
 
     dataset = {}
 
-    iter1 = read_item_from_suspicious_fastq(fh1)
-    iter2 = read_item_from_suspicious_fastq(fh2)
-    iterI = read_item_from_suspicious_fastq(fhI)
+    iter1 = iter_item_from_suspicious_fastq(fh1)
+    iter2 = iter_item_from_suspicious_fastq(fh2)
+    iterI = iter_item_from_suspicious_fastq(fhI)
 
-    while True:
+    iterators = [iter1, iter2, iterI]
 
-        i += 1
-        if i % 1000000 == 0:
-            print(i)
+    for iid, iterator in enumerate(iterators):
 
-        try:
-            header1, seq1, strand1, Q1 = next(iter1)
-            header2, seq2, strand2, Q2 = next(iter2)
-            headerI, seqI, strandI, QI = next(iterI)
-        except:
-            break
+        while True:
+            i += 1
+            if i % 1000000 == 0:
+                print(f"File {iid}: {i} and dataset size: {len(dataset)}")
+            try:
+                header, seq, strand, Q = next(iterator)
+            except:
+                break
 
-        name = header1.split()[0]
-        dataset.setdefault(name, [None, None, None])
-        dataset[name][0] = [header1, seq1, strand1, Q1]
+            name = header.split()[0]
+            dataset.setdefault(name, [None, None, None])
+            dataset[name][iid] = [header, seq, strand, Q]
 
-        name = header2.split()[0]
-        dataset.setdefault(name, [None, None, None])
-        dataset[name][1] = [header2, seq2, strand2, Q2]
-
-        name = headerI.split()[0]
-        dataset.setdefault(name, [None, None, None])
-        dataset[name][2] = [headerI, seqI, strandI, QI]
-
-
-    for item in dataset:
-        if item[0] and item[1] and item[2]:
-            fw1.write("".join(item[0]))
-            fw2.write("".join(item[1]))   
-            if item[2][0] == item[0][0]:
-                fw3.write(item[2])
-            else:
-                seqI = item[0][0].split(":")[-1]
-                headerI = item[0][0]
-                strandI = "+"
-                q = "F"*(len(seqI)-1)
-                QI = f"{q}\n"
-                fwI.write("".join([headerI, seqI, strandI, QI]))
+    for name in dataset:
+        fasqt1, fastq2, fastqI = dataset[name]
+        if fasqt1 and fastq2:
+            fw1.write("".join(fasqt1))
+            fw2.write("".join(fastq2))
+        if fastqI and fasqt1[0] == fastqI[0]:
+            fwI.write("".join(fastqI))
+        else:
+            seqI = fastqI[0].split(":")[-1]
+            headerI = fastqI[0]
+            strandI = "+"
+            q = "F"*(len(seqI)-1)
+            QI = f"{q}\n"
+            fwI.write("".join([headerI, seqI, strandI, QI]))
 
     fh1.close()
     fh2.close()

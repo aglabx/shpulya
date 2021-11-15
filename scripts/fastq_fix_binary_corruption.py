@@ -99,6 +99,8 @@ if __name__ == '__main__':
         if fasqt1 and fastq2:
             fw1.write("".join(fasqt1))
             fw2.write("".join(fastq2))
+        else:
+            continue
         if fastqI and fasqt1[0] == fastqI[0]:
             fwI.write("".join(fastqI))
         else:
